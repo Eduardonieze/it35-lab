@@ -2,13 +2,27 @@ import {
     IonButtons,
       IonContent, 
       IonHeader, 
-      IonMenuButton, 
+      IonIcon, 
+      IonItem, 
+      IonMenu, 
+      IonMenuButton,
+      IonMenuToggle,  
       IonPage, 
+      IonRouterOutlet, 
+      IonSplitPane, 
       IonTitle, 
       IonToolbar 
-  } from '@ionic/react';
+    } from '@ionic/react'
+    import {homeOutline, rocketOutline} from 'ionicons/icons';
+  import { Redirect, Route } from 'react-router';
+  import Home from './Home';
+  import About from './About';
   
-  const Menu: React.FC = () => {
+  const Menu: React.FC = () => {    const path = [
+    {name:'Home', url: '/it35-lab/app/Home', icon: homeOutline},
+    {name:'About', url: '/it35-lab/app/About', icon: rocketOutline},
+]
+
     return (
       <IonPage>
         <IonHeader>
