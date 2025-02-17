@@ -20,14 +20,15 @@ import { Route, Redirect } from 'react-router';
 import Favorites from './home-tabs/Favorites';
 import Feed from './home-tabs/feed';
 import Search from './home-tabs/Search';
+import feed from './home-tabs/feed';
 
 
 function Home() {
 
   const tabs = [
-    { name: 'Feed', tab: 'feed', url: '/it35-lab/app/home/feed', icon: bookOutline },
-    { name: 'Search', tab: 'search', url: '/it35-lab/app/home/search', icon: search },
-    { name: 'Favorites', tab: 'favorites', url: '/it35-lab/app/home/favorites', icon: star },
+    { name: 'feed', tab: 'feed', url: '/it35-lab/app/home/feed', icon: bookOutline },
+    { name: 'Search', tab: 'search', url: '/it35-lab/app/home/Search', icon: search },
+    { name: 'Favorites', tab: 'favorites', url: '/it35-lab/app/home/Favorites', icon: star },
   ];
 
   return (
@@ -43,7 +44,7 @@ function Home() {
 
         </IonTabBar>
         <IonRouterOutlet>
-          <Route exact path="/it35-lab/app/home/feed" render={Feed} />
+          <Route exact path="/it35-lab/app/home/feed" render={feed} />
           <Route exact path="/it35-lab/app/home/search" render={Search} />
           <Route exact path="/it35-lab/app/home/favorites" render={Favorites} />
           <Route exact path="/it35-lab/app/home">
