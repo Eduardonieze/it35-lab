@@ -17,9 +17,13 @@ import {
       IonToolbar 
   } from '@ionic/react';
 import { useState } from 'react';
+import { supabase } from '../utils/supabaseClient';
+import bcrypt from 'bcryptjs';
   
   const Register: React.FC = () => {
     const [username, setUsername] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -27,23 +31,45 @@ import { useState } from 'react';
     const [showSuccessModal, setShowSuccessModal] = useState(false);
 
     const handleOpenVerificationModal = () => {
-        {/*
-        if (!email.endsWith("@nbsc.edu.ph")) {
-            alert("Only @nbsc.edu.ph emails are allowed to register.");
-            return;
-        }
 
-        if (password !== confirmPassword) {
-            alert("Passwords do not match.");
-            return;
-        }
-        */}
         setShowVerificationModal(true);
     };
 
      const doRegister = async () => {
         
         setShowVerificationModal(false);
+
+        const { data, error } = await supabase.auth.signUp({
+            email,password,
+        });
+ 
+        if (error) {
+            alert("Account creation failed: " + error.message);
+            return;
+        }
+ 
+
+        // Hash password before storing in the database
+ 
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+ 
+        // Insert user data into 'users' table
+
+        const { error: insertError } = await supabase.from('users').insert([
+            {
+                username,
+                user_email: email,
+                user_firstname: firstName,
+                user_lastname: lastName,
+                user_password: hashedPassword,
+            },
+        ]);
+ 
+        if (insertError) {
+            alert("Failed to save user data: " + insertError.message);
+            return;
+        }
         
         setShowSuccessModal(true);
     };
