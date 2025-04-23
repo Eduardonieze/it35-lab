@@ -10,7 +10,7 @@ import {
   IonToast,  
   useIonRouter
 } from '@ionic/react';
-import { personCircleOutline } from 'ionicons/icons'; // Changed to a more professional user icon
+import { personCircleOutline } from 'ionicons/icons';
 import { useState } from 'react';
 import { supabase } from '../utils/supabaseClient';
 
@@ -55,13 +55,13 @@ const Login: React.FC = () => {
   
   return (
     <IonPage>
-      <IonContent className="ion-padding" color="light">
+      <IonContent className="ion-padding" color="dark">
         <div className="login-container">
           <div className="login-card">
             <div className="logo-container">
               <IonAvatar className="logo-avatar">
                 <IonIcon 
-                  icon={personCircleOutline}  // Changed to a more professional user icon
+                  icon={personCircleOutline}
                   className="logo-icon"
                 />
               </IonAvatar>
@@ -80,7 +80,7 @@ const Login: React.FC = () => {
                 placeholder="Enter Email"
                 value={email}
                 onIonChange={e => setEmail(e.detail.value!)}
-                style={{ '--color': '#000000' }}  // Added black text color
+                style={{ '--color': '#ffffff' }}
               />
             </div>
             
@@ -92,7 +92,7 @@ const Login: React.FC = () => {
                 placeholder="Password"
                 value={password}
                 onIonChange={e => setPassword(e.detail.value!)}
-                style={{ '--color': '#000000' }}  // Added black text color
+                style={{ '--color': '#ffffff' }}
               >
                 <IonInputPasswordToggle slot="end"></IonInputPasswordToggle>
               </IonInput>
@@ -121,10 +121,8 @@ const Login: React.FC = () => {
           </div>
         </div>
 
-        {/* Reusable AlertBox Component */}
         <AlertBox message={alertMessage} isOpen={showAlert} onClose={() => setShowAlert(false)} />
 
-        {/* IonToast for success message */}
         <IonToast
           isOpen={showToast}
           onDidDismiss={() => setShowToast(false)}
@@ -140,7 +138,6 @@ const Login: React.FC = () => {
 
 export default Login;
 
-
 const styles = `
   .login-container {
     display: flex;
@@ -154,10 +151,10 @@ const styles = `
   .login-card {
     width: 100%;
     max-width: 400px;
-    background: white;
+    background: #2d0b4e;
     border-radius: 16px;
     padding: 32px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
   }
   
   .logo-container {
@@ -169,18 +166,18 @@ const styles = `
   .logo-avatar {
     width: 100px;
     height: 100px;
-    background: #f8f9fa;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background: #3b0a64;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   }
   
   .logo-icon {
     font-size: 80px;
-    color: #5e72e4;
+    color: #9c6ade;
   }
   
   .login-title {
     text-align: center;
-    color: #2d3748;
+    color: #ffffff;
     margin-bottom: 8px;
     font-size: 24px;
     font-weight: 600;
@@ -188,7 +185,7 @@ const styles = `
   
   .login-subtitle {
     text-align: center;
-    color: #718096;
+    color: #c3b9d7;
     margin-bottom: 32px;
     font-size: 14px;
   }
@@ -199,20 +196,20 @@ const styles = `
   
   .custom-input {
     --border-radius: 8px;
-    --border-color: #e2e8f0;
-    --highlight-color-focused: #5e72e4;
-    --color: #000000; /* Ensures text is black */
+    --border-color: #a076cd;
+    --highlight-color-focused: #9c6ade;
+    --color: #ffffff;
   }
   
   .login-button {
-    --background: #5e72e4;
-    --background-activated: #4a5acf;
-    --background-focused: #4a5acf;
-    --background-hover: #4a5acf;
+    --background: #7a42e2;
+    --background-activated: #6935c7;
+    --background-focused: #6935c7;
+    --background-hover: #6935c7;
     margin-top: 16px;
     height: 48px;
     font-weight: 600;
-     --color: #000000; 
+    --color: #ffffff;
   }
   
   .register-link {
@@ -221,12 +218,11 @@ const styles = `
   }
   
   .register-button {
-    --color: #718096;
+    --color: #c3b9d7;
     font-size: 14px;
   }
 `;
 
-// Inject styles
 const styleElement = document.createElement('style');
 styleElement.innerHTML = styles;
 document.head.appendChild(styleElement);
