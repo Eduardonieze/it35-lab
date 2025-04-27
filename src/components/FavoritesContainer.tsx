@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { 
   IonContent,
   IonHeader,
@@ -43,26 +43,25 @@ const FavoritesContainer = () => {
   const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [showForm, setShowForm] = useState(true);
+
+  // useRef para i-track ang last scroll position among re-renders.
+  const lastScrollTop = useRef(0);
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
         const { data: { user }, error: authError } = await supabase.auth.getUser();
-        
         if (authError) throw authError;
-        
         setUser(user);
-        
         if (user) {
           const { data, error } = await supabase
             .from('anime_favorites')
             .select('*')
             .eq('user_id', user.id)
             .order('created_at', { ascending: false });
-            
           if (error) throw error;
-          
           setFavorites(data || []);
         }
       } catch (err: any) {
@@ -76,26 +75,41 @@ const FavoritesContainer = () => {
     fetchData();
   }, []);
 
+  // Scroll listener nga mag-show/hide sa form
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      if (currentScrollTop > lastScrollTop.current) {
+        // Kung mag-scroll down: itago ang form
+        setShowForm(false);
+      } else {
+        // Kung mag-scroll up: ipakita balik ang form
+        setShowForm(true);
+      }
+      lastScrollTop.current = currentScrollTop <= 0 ? 0 : currentScrollTop;
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const handleAddFavorite = async () => {
     if (!user) {
       setError('You must be logged in');
       return;
     }
-
     if (!animeTitle.trim()) {
       setError('Anime title is required');
       return;
     }
-
     setLoading(true);
     setError(null);
-
     try {
       const { data, error } = await supabase
         .from('anime_favorites')
         .insert([{
           user_id: user.id,
-          username: user.email || 'anonymous', // Use email as username
+          username: user.email || 'anonymous',
           anime_title: animeTitle,
           anime_image: animeImage || null,
           rating: rating || 0,
@@ -103,9 +117,7 @@ const FavoritesContainer = () => {
           is_public: isPublic
         }])
         .select();
-
       if (error) throw error;
-
       if (data) {
         setFavorites([data[0], ...favorites]);
         setAnimeTitle('');
@@ -133,13 +145,22 @@ const FavoritesContainer = () => {
         <IonLoading isOpen={loading} message={loading ? "Processing..." : undefined} />
 
         {/* Add New Favorite Form */}
-        <div style={{ position: 'sticky', top: 0, zIndex: 100, background: 'var(--ion-background-color)' }}>
+        <div 
+          style={{ 
+            
+            top: 0, 
+            zIndex: 100, 
+            background: 'var(--ion-background-color)', 
+            transition: 'all 0.3s ease',
+            transform: showForm ? 'translateY(0%)' : 'translateY(-100%)',
+            opacity: showForm ? 1 : 0
+          }}
+        >
           <IonCard>
             <IonCardHeader>
               <IonCardTitle>Add New Favorite</IonCardTitle>
             </IonCardHeader>
             <IonCardContent>
-              {/* Keep all your existing form inputs */}
               <IonLabel position="stacked">Anime Title*</IonLabel>
               <IonInput 
                 value={animeTitle} 
