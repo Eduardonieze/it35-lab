@@ -7,6 +7,12 @@
   transform: translateY(-50%);
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+
+ion-text {
+  font-family: 'Varela Round', sans-serif;
+}
+
 #container strong {
   font-size: 20px;
   line-height: 26px;

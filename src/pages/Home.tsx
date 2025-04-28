@@ -18,9 +18,8 @@ import { IonReactRouter } from '@ionic/react-router';
 import { bookOutline, search, star } from 'ionicons/icons';
 import { Route, Redirect } from 'react-router';
 import Favorites from './home-tabs/Favorites';
-import Feed from './home-tabs/feed';
 import Search from './home-tabs/Search';
-import feed from './home-tabs/feed';
+import feed from './home-tabs/Feed';
 
 
 function Home() {

@@ -27,7 +27,7 @@ import {
             height: '100%',
           }}
         >
-          Search
+          Searchs
         </div>
         </IonContent>
       </IonPage>
