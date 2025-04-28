@@ -67,8 +67,8 @@ const Login: React.FC = () => {
               </IonAvatar>
             </div>
             
-            <h1 className="login-title">Welcome Back</h1>
-            <p className="login-subtitle">Please sign in to continue</p>
+            <h1 className="login-title">𝓦𝓮𝓵𝓬 ☔ﾟℂիꪊ𝓹𝑎𝓹𝔦Եо☔⁠☆ﾟ⁠.⁠*⁠･⁠｡ﾟ</h1>
+            <p className="login-subtitle">"𝓛𝓲𝓯𝓮’𝓼 𝓳𝓾𝓼𝓽 𝓸𝓷𝓮 𝓵𝓸𝓷𝓰 𝓵𝓸𝓰𝓲𝓷 𝓼𝓬𝓻𝓮𝓮𝓷 𝔀𝓲𝓽𝓱 𝓯𝓸𝓻𝓰𝓸𝓽𝓽𝓮𝓷 𝓹𝓪𝓼𝓼𝔀𝓸𝓻𝓭𝓼."</p>
             
             <div className="form-group">
               <IonInput
@@ -105,7 +105,7 @@ const Login: React.FC = () => {
               shape="round"
               disabled={isLoading}
             >
-              {isLoading ? 'Signing In...' : 'Sign In'}
+              {isLoading ? 'Signing In...' : '𝔏𝔬𝔤𝔦𝔫𝔏𝔬𝔤𝔦𝔫'}
             </IonButton>
             
             <div className="register-link">
@@ -115,7 +115,12 @@ const Login: React.FC = () => {
                 size="small"
                 className="register-button"
               >
-                Don't have an account? <strong>Register</strong>
+                <p>Don't have an account? 
+  <button style={{ backgroundColor: 'violet', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '5px', cursor: 'pointer' }}>
+  𐌓𐌄Ᏽ𐌉𐌔𐌕𐌄𐌓
+  </button>
+</p>
+
               </IonButton>
             </div>
           </div>
@@ -126,7 +131,7 @@ const Login: React.FC = () => {
         <IonToast
           isOpen={showToast}
           onDidDismiss={() => setShowToast(false)}
-          message="Login successful! Redirecting..."
+          message="Login successful. Confidence restored."
           duration={1500}
           position="top"
           color="primary"
