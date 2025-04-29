@@ -17,11 +17,10 @@ const Favorites: React.FC = () => {
           <IonButtons slot='start'>
             <IonMenuButton></IonMenuButton>
           </IonButtons>
-          <IonTitle>Favorites</IonTitle>
+          <IonTitle>Feed</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        {/* Remove the centered div and just render the container */}
         <FavoritesContainer />
       </IonContent>
     </IonPage>
