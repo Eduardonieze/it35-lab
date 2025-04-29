@@ -19,7 +19,7 @@ import { bookOutline, search, star } from 'ionicons/icons';
 import { Route, Redirect } from 'react-router';
 import Favorites from './home-tabs/Favorites';
 import Search from './home-tabs/Search';
-import feed from './home-tabs/Feed';
+import feed from './home-tabs/feed';
 
 
 function Home() {
